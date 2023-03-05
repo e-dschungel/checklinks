@@ -39,8 +39,7 @@ foreach ($cl_config["URLs"] as $url) {
             echo "No errors or warnings found!\n";
             break;
         case 1:
-            echo "Warnings or errors found, report available at https:/admin.e-dschungel.de/checklinks/work/";
-            echo getOutputFilename($url) . "\n";
+            echo "Warnings or errors found while checking $url, mailing report to " . $cl_config['emailTo'] . "\n";
             sendMail(getOutputFilename($url), $cl_config);
             break;
         case 2:

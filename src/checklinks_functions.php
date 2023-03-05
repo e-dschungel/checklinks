@@ -70,8 +70,8 @@ function sendMail($filename, $config)
         $mail->Body    = $config['body'];
 
         $mail->send();
-        echo "Email has been sent";
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        echo "Report could not be sent. \n";
+        echo "Mailer Error: {$mail->ErrorInfo}\n";
     }
 }
