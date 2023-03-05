@@ -66,8 +66,8 @@ function sendMail($filename, $config)
         $mail->addAttachment("work/$filename");
 
         //Content
-        $mail->Subject = "Checklinks: Errors or warnings found";
-        $mail->Body    = "Errors or warning were found. See the attached report for details.";
+        $mail->Subject = $config['subject'];
+        $mail->Body    = $config['body'];
 
         $mail->send();
         echo "Email has been sent";
