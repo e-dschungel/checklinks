@@ -18,7 +18,8 @@ foreach ($cl_config["URLs"] as $url) {
     $process = new Process(
         [
         "/www/htdocs/w00a194a/.local/bin/linkchecker",
-        "--check-extern",
+        $cl_config['globalOptions'],
+        getURLSpecificConfigIfAvailable($url),
         "--file-output=html/utf-8/work/" . getOutputFilename($url),
         $url
         ],
