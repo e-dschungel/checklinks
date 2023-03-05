@@ -1,0 +1,17 @@
+{
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "*",
+        "phpcompatibility/php-compatibility": "*",
+        "squizlabs/php_codesniffer": "*",
+        "phpstan/phpstan": "*"
+    },
+        "require": {
+        "symfony/process": "^6.2",
+        "phpmailer/phpmailer": "^6.7"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
