@@ -18,6 +18,19 @@ function getOutputFilename($url)
     return $filename;
 }
 
+
+/**
+Return path + filename for outputfile generated from URL.
+
+@param $url URL
+
+@return path + filename
+ **/
+function getOutputFilePath($url)
+{
+    return("work/" . getOutputFilename($url));
+}
+
 /**
 Return config filename generated from URL.
 
@@ -34,32 +47,50 @@ function getConfigFilename($url)
 }
 
 /**
-Return config specific for given URL including "--config".
+Return config command option for linkchecker if configfile exists
 
-@param $url URL
+@param $filename filename of config file
 
-@return "--config=config_filename, including path, if existing, only "--config" if not
- **/
-function getURLSpecificConfigIfAvailable($url)
+@return --config=PATH/TO/CONFIG if config file exists, null if not
+**/
+function getConfig($filename)
 {
-    $filename = getConfigFilename($url);
     $configPath = "config/" . $filename;
     if (file_exists($configPath)) {
         return "--config=" . $configPath;
     } else {
-        return "--config=";
+        return;
     }
+}
+
+/**
+Return config specific for given URL including "--config".
+
+@param $sharedConfig config shared between all urls
+@param $url url for which URL specific config is derived
+
+@return "--config=config_filename, including path, if existing, only "--config" if not
+ **/
+function getConfigurationsArray($sharedConfig, $url)
+{
+    $configurations = [];
+    $specificConfig = getConfigFilename($url);
+    $configuration[] = getConfig($sharedConfig);
+    $configuration[] = getConfig($specificConfig);
+    //remove empty elements, e.g. if config file does not exist
+    $configuration = array_filter($configuration);
+    return $configuration;
 }
 
 /**
 Send mail with report attached.
 
-@param $filename filename of file to attach
+@param $attachmentPath path to file to attach
 @param $config configuration array
 
 @return void
  **/
-function sendMail($filename, $config)
+function sendMail($attachmentPath, $config)
 {
     $mail = new PHPMailer(true);
 
@@ -96,7 +127,7 @@ function sendMail($filename, $config)
         $mail->addAddress($config['emailTo']);
 
         //Attachments
-        $mail->addAttachment("work/$filename");
+        $mail->addAttachment($attachmentPath);
 
         //Content
         $mail->Subject = $config['subject'];

@@ -15,18 +15,13 @@ if (!isset($cl_config)) {
 
 foreach ($cl_config["URLs"] as $url) {
     echo "Checking $url \n";
-    $process = new Process(
-        [
-        $cl_config['linkcheckerPath'],
-        $cl_config['globalOptions'],
-        getURLSpecificConfigIfAvailable($url),
-        "--file-output=html/utf-8/work/" . getOutputFilename($url),
-        $url
-        ],
+    $command = array_merge(
+        [$cl_config['linkcheckerPath']],
+        getConfigurationsArray("linkchecker.conf", $url),
+        ["--file-output=html/utf-8/" . getOutputFilePath($url), $url]
     );
-
+    $process = new Process($command);
     $process->setTimeout(3600);
-
     $process->run(
         function ($type, $buffer) {
             echo $buffer;
@@ -41,11 +36,15 @@ foreach ($cl_config["URLs"] as $url) {
             break;
         case 1:
             echo "Warnings or errors found while checking $url, mailing report to " . $cl_config['emailTo'] . "\n";
-            sendMail(getOutputFilename($url), $cl_config);
+            sendMail(getOutputFilePath($url), $cl_config);
             break;
         case 2:
             echo "Run failed:\n";
             echo $process->getErrorOutput();
             break;
+    }
+    //remove output file
+    if (is_file(getOutputFilePath($url))) {
+        unlink(getOutputFilePath($url));
     }
 }
