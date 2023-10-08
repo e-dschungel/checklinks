@@ -3,3 +3,4 @@ vendor/
 config/config.inc.php
 config/*.conf
 !config/*.dist.conf
+checklinks.zip
