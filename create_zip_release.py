@@ -8,8 +8,8 @@ import os
 
 # config
 COMPOSER = "composer.phar"
-REPO_URL = "https://github.com/e-dschungel/rssgoemail.git"
-ZIP_FILE_NAME = "rssgoemail.zip"
+REPO_URL = "https://github.com/e-dschungel/checklinks.git"
+ZIP_FILE_NAME = "checklinks.zip"
 EXCLUDE_PATTERN = ["*.git/*", "create_zip_release.py", "*.gitignore", "mypear.xml", "mypsr12.xml", "phpstan-neon", "check_codingstyle.sh", "phpdoc.dist.xml"]
 
 # create ZIP
