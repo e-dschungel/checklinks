@@ -73,9 +73,9 @@ Merge $sharedConfig (for all URLs) and specific config for $url to a given file 
 function mergeConfigFiles($sharedConfig, $url, $mergedConfig)
 {
     $specificConfig = getConfigFilename($url);
-    $fp = fopen("config/" . $mergedConfig, "w");
-    copyFileIfExisting($fp, "config/" . $sharedConfig);
-    copyFileIfExisting($fp, "config/" . $specificConfig);
+    $fp = fopen($mergedConfig, "w");
+    copyFileIfExisting($fp, $sharedConfig);
+    copyFileIfExisting($fp, dirname($sharedConfig) . "/" . $specificConfig);
     fclose($fp);
 }
 

@@ -13,8 +13,8 @@ if (!isset($cl_config)) {
     throw new Exception('$cl_config is not set');
 }
 
-$mergedConfig = "mergedConfig.conf";
-$sharedConfig = "linkchecker.conf";
+$mergedConfig = "config/mergedConfig.conf";
+$sharedConfig = "config/linkchecker.conf";
 
 
 foreach ($cl_config["URLs"] as $url) {
