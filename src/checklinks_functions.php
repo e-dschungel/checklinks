@@ -47,39 +47,36 @@ function getConfigFilename($url)
 }
 
 /**
-Return config command option for linkchecker if configfile exists
+Copy content of given file to file handle
 
-@param $filename filename of config file
+@param $fp file handle to write to
+@param $path path of file to copy
 
-@return --config=PATH/TO/CONFIG if config file exists, null if not
-**/
-function getConfig($filename)
+@return void
+ **/
+function copyFileIfExisting($fp, $path)
 {
-    $configPath = "config/" . $filename;
-    if (file_exists($configPath)) {
-        return "--config=" . $configPath;
-    } else {
-        return;
+    if (file_exists($path)) {
+        fwrite($fp, file_get_contents($path));
     }
 }
 
 /**
-Return config specific for given URL including "--config".
+Merge $sharedConfig (for all URLs) and specific config for $url to a given file ($mergedConfig)
 
-@param $sharedConfig config shared between all urls
-@param $url url for which URL specific config is derived
+@param $sharedConfig config shared for all URLs
+@param $url URL for which specific config is requested
+@param $mergedConfig file name to store merged config
 
-@return "--config=config_filename, including path, if existing, only "--config" if not
+@return void
  **/
-function getConfigurationsArray($sharedConfig, $url)
+function mergeConfigFiles($sharedConfig, $url, $mergedConfig)
 {
-    $configurations = [];
     $specificConfig = getConfigFilename($url);
-    $configuration[] = getConfig($sharedConfig);
-    $configuration[] = getConfig($specificConfig);
-    //remove empty elements, e.g. if config file does not exist
-    $configuration = array_filter($configuration);
-    return $configuration;
+    $fp = fopen("config/" . $mergedConfig, "w");
+    copyFileIfExisting($fp, "config/" . $sharedConfig);
+    copyFileIfExisting($fp, "config/" . $specificConfig);
+    fclose($fp);
 }
 
 /**

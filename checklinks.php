@@ -13,11 +13,16 @@ if (!isset($cl_config)) {
     throw new Exception('$cl_config is not set');
 }
 
+$mergedConfig = "mergedConfig.conf";
+$sharedConfig = "linkchecker.conf";
+
+
 foreach ($cl_config["URLs"] as $url) {
     echo "Checking $url \n";
+    mergeConfigFiles($sharedConfig, $url, $mergedConfig);
     $command = array_merge(
         [$cl_config['linkcheckerPath']],
-        getConfigurationsArray("linkchecker.conf", $url),
+        ["--config=" . $mergedConfig],
         ["--file-output=html/utf-8/" . getOutputFilePath($url), $url]
     );
     $process = new Process($command);
