@@ -45,3 +45,7 @@ The URL specific file will be loaded after `linkchecker.conf` and will overwrite
 ## Changelog
 ### Version 0.1
 * first public release
+
+### Version 0.2
+* update PHPMailer to 6.9.1
+* update dev dependencies
