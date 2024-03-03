@@ -18,7 +18,7 @@ foreach ($cl_config["URLs"] as $url) {
     $configFile = "config/" . getConfigFilename($url);
     $command = array_merge(
         [$cl_config['linkcheckerPath']],
-        ["--config=", $configFile],
+        ["--config=" . $configFile],
         ["--file-output=html/utf-8/" . getOutputFilePath($url), $url]
     );
     $process = new Process($command);
