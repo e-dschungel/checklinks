@@ -47,39 +47,6 @@ function getConfigFilename($url)
 }
 
 /**
-Copy content of given file to file handle
-
-@param $fp file handle to write to
-@param $path path of file to copy
-
-@return void
- **/
-function copyFileIfExisting($fp, $path)
-{
-    if (file_exists($path)) {
-        fwrite($fp, file_get_contents($path));
-    }
-}
-
-/**
-Merge $sharedConfig (for all URLs) and specific config for $url to a given file ($mergedConfig)
-
-@param $sharedConfig config shared for all URLs
-@param $url URL for which specific config is requested
-@param $mergedConfig file name to store merged config
-
-@return void
- **/
-function mergeConfigFiles($sharedConfig, $url, $mergedConfig)
-{
-    $specificConfig = getConfigFilename($url);
-    $fp = fopen($mergedConfig, "w");
-    copyFileIfExisting($fp, $sharedConfig);
-    copyFileIfExisting($fp, dirname($sharedConfig) . "/" . $specificConfig);
-    fclose($fp);
-}
-
-/**
 Send mail with report attached.
 
 @param $attachmentPath path to file to attach
