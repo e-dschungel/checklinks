@@ -13,19 +13,16 @@ It uses [PHPMailer](https://github.com/PHPMailer/PHPMailer) for email sending an
 * Clone this repo `git clone https://github.com/e-dschungel/checklinks`
 * Install dependencies using composer `composer install --no-dev`
 * Rename `config/config.dist.php` to `config/config.conf.php` and edit it according to your needs
-* Rename `config/linkchecker.dist.conf` to `config/linkchecker.conf` and edit it according to your needs
-* Create url specific configuration (named like url, dots replaced with underscores)
+* Create url specific configuration (named like url, dots replaced with underscores, e.g. http://example.com => example_com.conf). Rename `example_com.dist.conf` and edit accordingly.)
 
 ### From ZIP file
 * Download `checklinks.zip` (NOT `Source Code (zip)` or `Source Code (tar.gz)`)  from https://github.com/e-dschungel/checklinks/releases/latest
 * Extract and upload it to your webserver
 * Rename `config/config.dist.php` to `config/config.conf.php` and edit it according to your needs
-* Rename `config/linkchecker.dist.conf` to `config/linkchecker.conf` and edit it according to your needs
-* Create url specific configuration (named like url, dots replaced with underscores)
+* Create url specific configuration (named like url, dots replaced with underscores, e.g. http://example.com => example_com.conf). Rename `example_com.dist.conf` and edit accordingly.)
 
 ## Configuration
-The configuration can be loaded from two files: the general file `linkchecker.conf` and a specific file for a given URL (dots replaced with underscores).
-The URL specific file will be loaded after `linkchecker.conf` and will overwrite settings given there.
+The configuration is specific for a given URL (dots replaced with underscores).
 
 |variable|description|
 |---|---|
@@ -49,3 +46,8 @@ The URL specific file will be loaded after `linkchecker.conf` and will overwrite
 ### Version 0.2
 * update PHPMailer to 6.9.1
 * update dev dependencies
+
+### Version 0.3
+* remove shared configuration for all URLs
+* update dev dependencies
+* update process to 5.4.36
