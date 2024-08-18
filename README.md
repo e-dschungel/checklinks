@@ -4,7 +4,7 @@ Access to the `proc_open` PHP function is required.
 It uses [PHPMailer](https://github.com/PHPMailer/PHPMailer) for email sending and [Process](https://github.com/symfony/process) for executing command line programs.
 
 ## Requirements
-* PHP > 7.2.5
+* PHP >= 8.1
 * enabled proc_open function
 * linkchecker executable
 
@@ -51,3 +51,7 @@ The configuration is specific for a given URL (dots replaced with underscores).
 * remove shared configuration for all URLs
 * update dev dependencies
 * update process to 5.4.36
+
+### Version 0.4
+* update minimal PHP version to 8.1
+* update Process to 6.4.8 
