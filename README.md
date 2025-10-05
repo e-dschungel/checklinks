@@ -55,3 +55,8 @@ The configuration is specific for a given URL (dots replaced with underscores).
 ### Version 0.4
 * update minimal PHP version to 8.1
 * update Process to 6.4.8 
+
+### Version 0.4.1
+* update PHPMailer to 6.11.1
+* update Process to 6.4.26
+* update dev dependencies
